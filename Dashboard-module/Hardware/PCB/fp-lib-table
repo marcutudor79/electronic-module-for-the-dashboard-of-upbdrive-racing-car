@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "DR-05/footprints")(type "KiCad")(uri "${KIPRJMOD}/../../../7.Component_Library/1.Dashboard/mod")(options "")(descr ""))
+)

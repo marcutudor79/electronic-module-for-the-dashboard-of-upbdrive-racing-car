@@ -1,0 +1,9 @@
+Right now the buttons are read by polling
+
+It's better to use less CPU time with interrupts:
+Example: https://github.com/espressif/esp-idf/blob/release/v5.1/examples/peripherals/touch_sensor/touch_sensor_v1/touch_pad_interrupt/main/tp_interrupt_main.c#L126
+
+Plan:
+-> allocate an interrupt for each button 
+-> change a global variable with the interrupt
+-> take care of the global variable in a task function 
