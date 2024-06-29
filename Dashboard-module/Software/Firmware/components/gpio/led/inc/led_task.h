@@ -48,14 +48,13 @@ esp_err_t shift_neutral_led_setup(void);
 esp_err_t shift_strip_led_setup(void);
 
 /*
-    * @brief This task will update the shift led based on the rpm value at 4Hz
-    *        and the neutral led based on the gear value at the same frequency
+    * @brief This task will update the the neutral led based on the gear @4Hz
     *
     * @param[in] pvParameters
     *
     * @return esp_err_t
 */
-void shift_neutral_led_update(void *pvParameters);
+void neutral_led_update(void *pvParameters);
 
 /*
     * @brief This task will update the shift strip at 30HZ refresh rate

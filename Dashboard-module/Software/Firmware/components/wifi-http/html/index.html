@@ -3,11 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UPBDrive Formula Student Team - File Download</title>
+  <title color: white>UPBDrive Formula Student Team - File Download</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #241e1e;
       margin: 20px;
+    }
+
+    h2 {
+      color: white;
+    }
+
+    .logo {
+      width: 60%;  /* Responsive width */
+      max-width: 700px;  /* Maximum width */
+      align-items: center;
+      height: auto;
+    }
+
+    .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    title {
+      color: white;
     }
     .container {
       text-align: center;
@@ -16,23 +38,221 @@
       display: inline-block;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #007bff;
-      color: white;
+      background-color: #ff9100;
+      color: black;
       text-decoration: none;
       border-radius: 5px;
       border: none;
       cursor: pointer;
     }
     .download-btn:hover {
-      background-color: #0056b3;
+      background-color: #ffffff;
     }
+
+    .table-container {
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        background-color: #fff;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #cccccc;
+    }
+
+    th {
+        background-color: #ff9100;
+    }
+
+    tbody tr:hover {
+        background-color: #f9f9f9;
+}
   </style>
 </head>
 <body>
+  <div class="content">
+    <img class="logo" src="/UPBDRIVE_Logo_Horizontal.jpg" alt="Embedded Image">
+  </div>
   <div class="container">
-    <h1>UPBDrive Formula Student Team</h1>
     <h2>DR-05 Log file</h2>
     <a class="download-btn" href="/sdcard/log.txt" download="log.txt">Download File</a>
   </div>
+  <br>
+  <br>
+  <div class="table-container">
+    <div class="container">
+        <table>
+            <th colspan="8">Live Data</th>
+            <tr>
+                <th>RPM</th>
+                <th>COOLANT TEMP</th>
+                <th>OIL PRESSURE</th>
+                <th>LV BATTERY</th>
+            </tr>
+            <tr>
+                <td id="rpm">-</td>
+                <td id="coolant_temperature">-</td>
+                <td id="oil_pressure">-</td>
+                <td id="lv_battery">-</td>
+            </tr>
+            <tr>
+              <th>CAN status</th>
+              <th>HYBRID status</th>
+              <th>SAFETY circuit status</th>
+              <th>FAN status</th>
+            </tr>
+            <tr>
+              <td id="can_status">-</td>
+              <td id="hybrid_status">-</td>
+              <td id="safety_circuit_status">-</td>
+              <td id="fan_status">-</td>
+            </tr>
+            <tr>
+              <th>TPS %</th>
+              <th>BRAKE APPL %</th>
+              <th>MAP</th>
+              <th>LAMBDA</th>
+            </tr>
+            <tr>
+              <td id="tps">-</td>
+              <td id="brake_appl">-</td>
+              <td id="map">-</td>
+              <td id="lambda">-</td>
+            </tr>
+            <tr>
+              <th>TYRE LF</th>
+              <th>TYRE RF</th>
+              <th>TYRE LR</th>
+              <th>TYRE RR</th>
+            </tr>
+            <tr>
+              <td id="tyre_lf">-</td>
+              <td id="tyre_rf">-</td>
+              <td id="tyre_lr">-</td>
+              <td id="tyre_rr">-</td>
+            </tr>
+            <tr>
+              <th>ACCEL_X</th>
+              <th>ACCEL_Y</th>
+              <th>ACCEL_Z</th>
+              <th>TIME   </th>
+            </tr>
+            <tr>
+              <td id="accel_x">-</td>
+              <td id="accel_y">-</td>
+              <td id="accel_z">-</td>
+              <td id="time">-</td>
+            </tr>
+            <tr>
+              <th>SDCARD_LOGGING</th>
+              <th>HYBRID SELECTOR</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <td id="sdcard_logging">-</td>
+              <td id="hybrid_selector">-</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+<script>
+
+  // function to obtain data from ESP32 backend
+  function getData()
+  {
+      let xhr = new XMLHttpRequest();
+
+      // /data URI returns a string with data
+      xhr.open("GET", "/data", false);
+      xhr.onload = function()
+      {
+          let str = xhr.response;
+
+          // the values are in "number number number number", where number is a
+          // an integer value, therefore it can be split by the space character
+          let values = str.split(" ").map(Number);
+
+          // update the values in the table
+          document.getElementById("rpm").innerText = values[0];
+          document.getElementById("coolant_temperature").innerText = values[1];
+          document.getElementById("oil_pressure").innerText = values[2];
+          document.getElementById("lv_battery").innerText = values[3] / 10;
+          document.getElementById("tps").innerText = values[8];
+          document.getElementById("brake_appl").innerText = values[9];
+          document.getElementById("map").innerText = values[10];
+          document.getElementById("lambda").innerText = values[11];
+          document.getElementById("tyre_lf").innerText = values[12];
+          document.getElementById("tyre_rf").innerText = values[13];
+          document.getElementById("tyre_lr").innerText = values[14];
+          document.getElementById("tyre_rr").innerText = values[15];
+          document.getElementById("accel_x").innerText = values[16];
+          document.getElementById("accel_y").innerText = values[17];
+          document.getElementById("accel_z").innerText = values[18];
+          document.getElementById("time").innerText = values[19] + ":" + values[20] + ":" + values[21];
+          document.getElementById("hybrid_selector").innerText = values[23];
+
+          if (values[4] == 1)
+          {
+            document.getElementById("can_status").innerText = "OK";
+          }
+          else
+          {
+            document.getElementById("can_status").innerText = "ERROR";
+          }
+
+          if (values[5] == 1)
+          {
+            document.getElementById("hybrid_status").innerText = "OK";
+          }
+          else
+          {
+            document.getElementById("hybrid_status").innerText = "ERROR";
+          }
+
+          if (values[6] == 1)
+          {
+            document.getElementById("safety_circuit_status").innerText = "OK";
+          }
+          else
+          {
+            document.getElementById("safety_circuit_status").innerText = "ERROR";
+          }
+
+          if (values[7] == 0)
+          {
+            document.getElementById("fan_status").innerText = "OFF";
+          }
+          else
+          {
+            document.getElementById("fan_status").innerText = "ON";
+          }
+          if (values[22] == 0)
+          {
+            document.getElementById("sdcard_logging").innerText = "ERROR";
+          }
+          else
+          {
+            document.getElementById("sdcard_logging").innerText = "OK";
+          }
+      }
+
+      xhr.send();
+      setTimeout(getData, 500);
+  }
+
+  getData();
+</script>
+
 </body>
 </html>

@@ -16,11 +16,14 @@
 ////                       GLOBAL MACROS                                    ////
 ////////////////////////////////////////////////////////////////////////////////
 
-#define LCD_MAIN_PAGE        (0x00)
-#define LCD_SECONDARY_PAGE   (0x11)
-#define LCD_THIRD_PAGE       (0x22)
-#define LCD_FOURTH_PAGE      (0x33)
-#define LCD_START_UP_PAGE    (0xAA)
+#define LCD_START_UP_PAGE           (0x00)
+#define LCD_SECONDARY_PAGE          (0x01)
+#define LCD_THIRD_PAGE              (0x02)
+#define LCD_MAIN_PAGE               (0x03)
+#define LCD_FOURTH_PAGE             (0x04)
+#define LCD_LOW_12V_BATTERY_PAGE    (0x05)
+#define LCD_LOW_OIL_PRESSURE_PAGE   (0x06)
+#define LCD_OVERHEAT_PAGE           (0x07)
 
 ////////////////////////////////////////////////////////////////////////////////
 ////                       GLOBAL CONSTANTS                                 ////

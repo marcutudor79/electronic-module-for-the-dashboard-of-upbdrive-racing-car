@@ -9,7 +9,8 @@ set(reqs "adc"
          "i2c"
          "spi"
          "uart"
-         "wifi-http")
+         "wifi-http"
+         "timer")
 
 # Register the tasks in esp-idf build system
 idf_component_register(SRCS "${srcs}" REQUIRES "${reqs}")

@@ -138,23 +138,11 @@ esp_err_t accelerometer_setup(void)
     configuration_options.clk_flags = 0;
 
     /* Configure the bus and install the driver */
-    esp_response = i2c_param_config(i2c_master_port, &configuration_options);
-    if (esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(i2c_param_config(i2c_master_port, &configuration_options));
 
-    i2c_driver_install(i2c_master_port, configuration_options.mode, 0, 0, 0);
-    if (esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(i2c_driver_install(i2c_master_port, configuration_options.mode, 0, 0, 0));
 
-    esp_response = accelerometer_reset();
-    if (esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(accelerometer_reset());
 
     esp_response = ESP_OK;
     return esp_response;
@@ -173,11 +161,7 @@ static esp_err_t accelerometer_reset(void)
     ***************************************************************************/
 
     /* Trigger a reset by setting PWR_MGMT_1 bit7 DEVICE_RESET bit  */
-    esp_response = i2c_master_write_to_device(i2c_master_port, MPU6050_I2C_ADDRESS, &transmit_stream[0], STREAM_SIZE(transmit_stream), pdMS_TO_TICKS(100));
-    if (esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(i2c_master_write_to_device(i2c_master_port, MPU6050_I2C_ADDRESS, &transmit_stream[0], STREAM_SIZE(transmit_stream), pdMS_TO_TICKS(100)));
 
     /* Wait 100ms in order for the issued reset to complete */
     vTaskDelay(100 / portTICK_PERIOD_MS);
@@ -186,11 +170,7 @@ static esp_err_t accelerometer_reset(void)
     transmit_stream[1] = MPU6050_ACCEL_RESET | MPU6050_GYRO_RESET | MPU6050_TEMP_RESET;
 
     /* Trigger a reset of accelerometer, gyro and temp sensor on MPU6050 */
-    esp_response = i2c_master_write_to_device(i2c_master_port, MPU6050_I2C_ADDRESS, &transmit_stream[0], STREAM_SIZE(transmit_stream), pdMS_TO_TICKS(100));
-    if (esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(i2c_master_write_to_device(i2c_master_port, MPU6050_I2C_ADDRESS, &transmit_stream[0], STREAM_SIZE(transmit_stream), pdMS_TO_TICKS(100)));
 
     /* Wait 100ms in order for the issued reset to complete */
     vTaskDelay(100 / portTICK_PERIOD_MS);
@@ -200,11 +180,7 @@ static esp_err_t accelerometer_reset(void)
 
     /* Finally, reset the PWR_MGMT_1 bit7 DEVICE_RESET bit 7 (it should automatically
        clear to 0, but this write forces it to 0) */
-    esp_response = i2c_master_write_to_device(i2c_master_port, MPU6050_I2C_ADDRESS, &transmit_stream[0], STREAM_SIZE(transmit_stream), pdMS_TO_TICKS(100));
-    if (esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(i2c_master_write_to_device(i2c_master_port, MPU6050_I2C_ADDRESS, &transmit_stream[0], STREAM_SIZE(transmit_stream), pdMS_TO_TICKS(100)));
 
     /* Wait 100ms in order for the issued reset to complete */
     vTaskDelay(100 / portTICK_PERIOD_MS);
@@ -220,11 +196,7 @@ static esp_err_t accelerometer_reset(void)
        common/common.h header file */
     transmit_stream[1] = MPU6050_ACCEL_SET_RANGE;
 
-    esp_response = i2c_master_write_to_device(i2c_master_port, MPU6050_I2C_ADDRESS, &transmit_stream[0], STREAM_SIZE(transmit_stream), pdMS_TO_TICKS(100));
-    if (esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(i2c_master_write_to_device(i2c_master_port, MPU6050_I2C_ADDRESS, &transmit_stream[0], STREAM_SIZE(transmit_stream), pdMS_TO_TICKS(100)));
 
     /* Wait 100ms in order for the configuratio to complete  */
     vTaskDelay(100 / portTICK_PERIOD_MS);
@@ -235,7 +207,6 @@ static esp_err_t accelerometer_reset(void)
 
 void accelerometer_read(void *pvParameters)
 {
-    esp_err_t esp_response                    = ESP_FAIL;
     status_firmware_t *general_status         = (status_firmware_t*)pvParameters;
     display_data_t *display_data              = general_status->display_data;
     SemaphoreHandle_t xSemaphore_display_data = general_status->xSemaphore_display_data;
@@ -247,17 +218,13 @@ void accelerometer_read(void *pvParameters)
     while(true)
     {
         /* Start reading acceleration registers from register 0x3B for 6 bytes */
-        esp_response = i2c_master_write_read_device( i2c_master_port,
+        ESP_ERROR_CHECK(i2c_master_write_read_device( i2c_master_port,
                                                     MPU6050_I2C_ADDRESS,
                                                     &transmit_stream,
                                                     1,
                                                     &read_stream[0],
                                                     STREAM_SIZE(read_stream),
-                                                    MPU6050_POLLING_RATE);
-        if (esp_response != ESP_OK)
-        {
-            ESP_LOGE("accelerometer_read", "Failed to read data");
-        }
+                                                    MPU6050_POLLING_RATE));
 
         /* Catch MPU6050 error or entering sleep mode
         Typically it manifests in reading 0 on all accelerometer axis */
@@ -274,7 +241,8 @@ void accelerometer_read(void *pvParameters)
             /* Combine the High and Low bytes from read_stream into a single variable  */
             for (uint_fast8_t i = 0; i < MPU6050_AXIS_NUM; i++)
             {
-                *(display_data->accelerometer + i) = (read_stream[i * 2] << 8 | read_stream[(i * 2) + 1]);
+                *(display_data->accelerometer + i)   = (read_stream[i * 2] << 8 | read_stream[(i * 2) + 1]);
+                *(display_data->accelerometer_g + i) = (float)RAW_TO_G((*(display_data->accelerometer + i)));
             }
             xSemaphoreGive(xSemaphore_display_data);
         }

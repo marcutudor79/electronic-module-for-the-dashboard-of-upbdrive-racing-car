@@ -51,3 +51,9 @@ fp-info-cache
 *.exe
 *.out
 *.app
+
+# Build folder
+build
+
+# VSCode settings
+.vscode

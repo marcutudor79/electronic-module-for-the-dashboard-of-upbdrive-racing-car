@@ -114,7 +114,6 @@ esp_err_t hybrid_selector_setup(void)
 
 void hybrid_selector_read(void *pvParameters)
 {
-    esp_err_t esp_response                    = ESP_FAIL;
     status_firmware_t *general_status         = (status_firmware_t*)pvParameters;
     display_data_t    *display_data           = general_status->display_data;
     SemaphoreHandle_t xSemaphore_display_data = general_status->xSemaphore_display_data;
@@ -125,16 +124,7 @@ void hybrid_selector_read(void *pvParameters)
 
     while(true)
     {
-        esp_response = adc_oneshot_read(adc1_handle, ADC_CHANNEL_6, &adc_buffer);
-        if (esp_response != ESP_OK)
-        {
-            #ifdef ENABLE_DEBUG_HYBRID_SELECTOR
-            printf("Failed to read the ADC1 value\n");
-            #endif /* ENABLE_DEBUG_HYBRID_SELECTOR */
-
-            /* put the task in blocking state */
-            vTaskDelay(HYBRID_SELECTOR_POLLING_RATE);
-        }
+        ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, ADC_CHANNEL_6, &adc_buffer)) ;
 
         /* Add the value to the hybrid selector raw buffer */
         hybrid_selector_raw = hybrid_selector_raw + adc_buffer;
@@ -143,7 +133,7 @@ void hybrid_selector_read(void *pvParameters)
         if( i >= (HYBRID_SELECTOR_MA_FILTER_SAMPLES) )
         {
             /* Compute the moving average result of the raw buffer */
-            hybrid_selector_raw = hybrid_selector_raw / 51;
+            hybrid_selector_raw = hybrid_selector_raw / (HYBRID_SELECTOR_MA_FILTER_SAMPLES+1);
 
             /* Update the state of the of the hybrid selector */
             if (hybrid_selector_raw >= RAW_VOLTAGE_0V4 && hybrid_selector_raw <= RAW_VOLTAGE_0V6)

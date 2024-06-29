@@ -25,10 +25,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-//generate sawtooth signal for CLT, IAT, MAP
-uint8_t generate_sawtooth(uint8_t data);
 
+void generate_sawtooth(uint8_t* data);
 
+void fill_with_sawtooth(display_data_t* display_data);
 
 
 #endif /* SAWTOOTH_SIGNAL_H */

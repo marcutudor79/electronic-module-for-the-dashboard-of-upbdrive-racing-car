@@ -104,50 +104,19 @@ esp_err_t buttons_setup(void)
         .intr_type    = GPIO_INTR_ANYEDGE
     };
 
-    esp_response = gpio_config(&gpio_button_rad_fan);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(gpio_config(&gpio_button_rad_fan));
 
-    esp_response = gpio_config(&gpio_button_lcd_page);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(gpio_config(&gpio_button_lcd_page));
 
-    esp_response = gpio_config(&gpio_button_safety_circuit);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(gpio_config(&gpio_button_safety_circuit));
 
-    esp_response = gpio_install_isr_service(ESP_INTR_FLAG_IRAM);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(gpio_install_isr_service(ESP_INTR_FLAG_IRAM));
 
-    /* Add isr handler for GPIO_BUTTON_LCD_PAGE */
-    esp_response = gpio_isr_handler_add(GPIO_BUTTON_LCD_PAGE, (gpio_isr_t)button_change_page_isr, NULL);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(gpio_isr_handler_add(GPIO_BUTTON_LCD_PAGE, (gpio_isr_t)button_change_page_isr, NULL));
 
-    /* Add isr handler for GPIO_BUTTON_RAD_FAN */
-    esp_response = gpio_isr_handler_add(GPIO_BUTTON_RAD_FAN, (gpio_isr_t)button_rad_fan_isr, NULL);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(gpio_isr_handler_add(GPIO_BUTTON_RAD_FAN, (gpio_isr_t)button_rad_fan_isr, NULL));
 
-    /* Add isr handler for GPIO_BUTTON_SAFETY_CIRC */
-    esp_response = gpio_isr_handler_add(GPIO_BUTTON_SAFETY_CIRC, (gpio_isr_t)button_safety_circ_isr, NULL);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(gpio_isr_handler_add(GPIO_BUTTON_SAFETY_CIRC, (gpio_isr_t)button_safety_circ_isr, NULL));
 
     /* Avoid unknown boot-up state for SAFETY CIRCUIT */
     if(gpio_get_level(GPIO_BUTTON_SAFETY_CIRC) == 1)
@@ -159,10 +128,9 @@ esp_err_t buttons_setup(void)
         display_data.safety_circuit_status = false;
     }
 
+    esp_response = ESP_OK;
     return esp_response;
 }
-
-
 
 #ifdef ENABLE_DEBUG_BUTTONS
 void buttons_read(void *pvParameters)

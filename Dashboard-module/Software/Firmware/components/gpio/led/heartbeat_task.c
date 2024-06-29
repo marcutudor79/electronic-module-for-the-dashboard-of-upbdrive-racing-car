@@ -34,27 +34,20 @@ esp_err_t heartbeat_setup(void)
         .intr_type    = GPIO_INTR_DISABLE
     };
 
-    esp_response = gpio_config(&gpio_led_status);
+    ESP_ERROR_CHECK(gpio_config(&gpio_led_status));
+
+    esp_response = ESP_OK;
     return esp_response;
 }
 
 
 void heartbeat(void *pvParameters)
 {
-    esp_err_t esp_response      = ESP_FAIL;
     uint8_t heartbeat_led_state = 0;
 
     while(true)
     {
-        esp_response = gpio_set_level(GPIO_LED_STATUS, heartbeat_led_state);
-        if(esp_response != ESP_OK)
-        {
-            #ifdef ENABLE_DEBUG_HEARTBEAT
-            printf("Failed to set the level of the heartbeat LED\n");
-            #endif /* ENABLE_DEBUG_HEARTBEAT */
-
-            vTaskDelay(HEARTBEAT_LED_RATE);
-        }
+        ESP_ERROR_CHECK(gpio_set_level(GPIO_LED_STATUS, heartbeat_led_state));
 
         /* toggle the level of the heartbeat */
         heartbeat_led_state = !heartbeat_led_state;

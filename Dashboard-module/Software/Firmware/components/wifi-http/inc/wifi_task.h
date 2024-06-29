@@ -45,7 +45,6 @@ typedef struct {
 
 #define EXAMPLE_HTTP_QUERY_KEY_MAX_LEN  (64)
 #define HTTPD_401      "401 UNAUTHORIZED"           /*!< HTTP Response 401 */
-#define MIN(a, b) (((a) < (b)) ? (a) : (b))
 
 /* Mount point of the sdcard */
 #define MOUNT_POINT "/sdcard"

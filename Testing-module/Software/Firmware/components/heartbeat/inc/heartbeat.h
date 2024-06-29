@@ -6,7 +6,7 @@
 #ifndef HEARTBEAT_H
 #define HEARTBEAT_H
 
-#include "../../common/inc/common.h"
+#include "common.h"
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/adc.h"

@@ -1,5 +1,0 @@
-https://lastminuteengineers.com/esp32-pinout-reference/ 		(ESP32 pinout)
-https://dl.espressif.com/dl/schematics/esp32_devkitc_v4-sch.pdf (ESP32 devkit sch)
-
-
-git submodule update --recursive --remote --force

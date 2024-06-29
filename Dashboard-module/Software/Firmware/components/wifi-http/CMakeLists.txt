@@ -13,7 +13,9 @@ set(reqs "common"
          "driver"
          "vfs")
 
+set(embed_files "html/index.html")
+
 # Register the tasks in esp-idf build system
 idf_component_register(SRCS "${srcs}"
                        INCLUDE_DIRS "inc" REQUIRES "${reqs}"
-                       EMBED_TXTFILES "html/index.html")
+                       EMBED_TXTFILES "${embed_files}")

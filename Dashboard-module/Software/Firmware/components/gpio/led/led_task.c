@@ -19,8 +19,8 @@
 
 #define RMT_LED_STRIP_RESOLUTION_HZ (10000000) // 10MHz resolution, 1 tick = 0.1us (led strip needs a high resolution)
 
-#define STRIP_LED_NUMBER             (8)
-#define EXAMPLE_CHASE_SPEED_MS      (0)
+#define STRIP_LED_NUMBER                (8)
+#define EXAMPLE_CHASE_SPEED_MS          (0)
 
 /*******************************************************************************
  *                            LED STRIP RPM CASE                               *
@@ -41,7 +41,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////                       LOCAL CONSTANTS                                  ////
 ////////////////////////////////////////////////////////////////////////////////
-static const char *TAG = "example";
 static rmt_channel_handle_t led_chan           = NULL;
 static  rmt_tx_channel_config_t tx_chan_config =
 {
@@ -61,121 +60,65 @@ esp_err_t shift_neutral_led_setup(void)
 {
     esp_err_t esp_response = ESP_FAIL;
 
-    /* Configuration of the shift led gpio */
-    gpio_config_t gpio_shiftled =
-    {
-        .pin_bit_mask = (1ULL << GPIO_LED_SHIFT),
-        .mode         = GPIO_MODE_OUTPUT,
-        .pull_up_en   = GPIO_PULLUP_DISABLE,
-        .pull_down_en = GPIO_PULLDOWN_ENABLE,
-        .intr_type    = GPIO_INTR_DISABLE
-    };
-
     /* Configuration of the neutral led gpio */
     gpio_config_t gpio_neutral =
     {
         .pin_bit_mask = (1ULL << GPIO_LED_NEUTRAL),
-        .mode         = GPIO_MODE_OUTPUT,
+        .mode         = GPIO_MODE_INPUT,
         .pull_up_en   = GPIO_PULLUP_DISABLE,
-        .pull_down_en = GPIO_PULLDOWN_ENABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
         .intr_type    = GPIO_INTR_DISABLE
     };
 
     /* Configure the gpio based on the struct */
-    esp_response = gpio_config(&gpio_shiftled);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
+    ESP_ERROR_CHECK(gpio_config(&gpio_neutral));
 
-    /* Configure the gpio based on the struct */
-    esp_response = gpio_config(&gpio_neutral);
-    if(esp_response != ESP_OK)
-    {
-        return esp_response;
-    }
-
+    esp_response = ESP_OK;
     return esp_response;
 }
 
 esp_err_t shift_strip_led_setup(void)
 {
     esp_err_t esp_response = ESP_FAIL;
-    ESP_LOGI(TAG, "Create RMT TX channel");
+
     ESP_ERROR_CHECK(rmt_new_tx_channel(&tx_chan_config, &led_chan));
 
-    ESP_LOGI(TAG, "Install led strip encoder");
-    led_strip_encoder_config_t encoder_config = {
+    led_strip_encoder_config_t encoder_config =
+    {
         .resolution = RMT_LED_STRIP_RESOLUTION_HZ,
     };
+
     ESP_ERROR_CHECK(rmt_new_led_strip_encoder(&encoder_config, &led_encoder));
 
-    ESP_LOGI(TAG, "Enable RMT TX channel");
     ESP_ERROR_CHECK(rmt_enable(led_chan));
 
     esp_response = ESP_OK;
     return esp_response;
 }
 
-void shift_neutral_led_update(void *pvParameters)
+void neutral_led_update(void *pvParameters)
 {
-    esp_err_t esp_response                      = ESP_FAIL;
     status_firmware_t *general_status           = (status_firmware_t*) pvParameters;
     display_data_t  *display_data               = general_status->display_data;
     SemaphoreHandle_t xSemaphore_display_data   = general_status->xSemaphore_display_data;
-    uint8_t shiftled_state                      = 0;
 
     while(true)
     {
-        if( xSemaphoreTake( xSemaphore_display_data, ( TickType_t ) 10 ) == pdTRUE )
+        if (gpio_get_level(GPIO_LED_NEUTRAL) == 0)
         {
-            /*******************************************************************
-             *                     Shift LED logic                             *
-             ******************************************************************/
-
-            /* If the rpm is higher than SHIFTLED_THRESHOLD set, light up the LED */
-            if(display_data->rpm >= SHIFTLED_THRESHOLD)
+            if( xSemaphoreTake( xSemaphore_display_data, ( TickType_t ) 10 ) == pdTRUE )
             {
-                esp_response = gpio_set_level(GPIO_LED_SHIFT, shiftled_state);
-                shiftled_state = !shiftled_state;
+                display_data->current_gear = NEUTRAL_GEAR;
+                xSemaphoreGive( xSemaphore_display_data );
             }
-
-            /* The led should be turned off after the rpm drops */
-            else
-            {
-                esp_response = gpio_set_level(GPIO_LED_SHIFT, 0);
-            }
-
-            /*******************************************************************
-             *                     Neutral LED logic                           *
-             ******************************************************************/
-
-            /* If the gear is neutral, light up the LED */
-            if(display_data->current_gear == NEUTRAL_GEAR)
-            {
-                esp_response = gpio_set_level(GPIO_LED_NEUTRAL, 1);
-            }
-
-            /* The led should be turned off after the gear is changed */
-            else
-            {
-                esp_response = gpio_set_level(GPIO_LED_NEUTRAL, 0);
-            }
-
-            xSemaphoreGive( xSemaphore_display_data );
-        }
-        else
-        {
-            continue;
         }
 
-        vTaskDelay(SHIFTLED_RATE);
+        vTaskDelay(NEUTRAL_LED_RATE);
     }
 }
 
 void shift_strip_led_update(void *pvParameters)
 {
-    esp_err_t esp_response                      = ESP_FAIL;
     status_firmware_t *general_status           = (status_firmware_t*) pvParameters;
     display_data_t  *display_data               = general_status->display_data;
     SemaphoreHandle_t xSemaphore_display_data   = general_status->xSemaphore_display_data;

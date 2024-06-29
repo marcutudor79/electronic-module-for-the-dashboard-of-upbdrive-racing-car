@@ -4937,12 +4937,6 @@
 		(uuid "2f2167b2-7cf1-4012-ad55-b7d51a9f4d12")
 	)
 	(junction
-		(at 78.74 22.86)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "31a18a6e-ac3f-4e9b-b72e-f8c4b8df45bd")
-	)
-	(junction
 		(at 43.18 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4953,12 +4947,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "392d5480-a38a-4e39-b672-0020a297ac38")
-	)
-	(junction
-		(at 76.2 30.48)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3a61047e-ab65-443e-ab6f-5b7b14f944d4")
 	)
 	(junction
 		(at 15.24 179.07)
@@ -4977,6 +4965,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "429eca5b-b061-4dcb-851a-6a07ff5ece81")
+	)
+	(junction
+		(at 76.2 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "49f8fc7e-2d3b-41ec-9cf2-bf0cc4877b33")
 	)
 	(junction
 		(at 100.33 173.99)
@@ -5069,16 +5063,16 @@
 		(uuid "8c4e88bb-e5d1-4ba0-8db1-60298634144e")
 	)
 	(junction
-		(at 76.2 22.86)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "909ce02b-3a4c-482e-bc80-3b8621fa2c0c")
-	)
-	(junction
 		(at 279.4 35.56)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "984c5243-f466-41c0-b7ec-bb89b9c6c321")
+	)
+	(junction
+		(at 78.74 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "98d710fe-68fa-4dc5-83fc-f7ea9ad934eb")
 	)
 	(junction
 		(at 17.78 128.27)
@@ -5147,10 +5141,10 @@
 		(uuid "b7c59a65-96a6-46b6-b9c8-484d123e52ef")
 	)
 	(junction
-		(at 78.74 30.48)
+		(at 76.2 22.86)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c1359581-c0d6-4fe2-8620-2d4a229261f2")
+		(uuid "c217d14a-3546-4611-a6b6-9942c704c1cf")
 	)
 	(junction
 		(at 198.12 90.17)
@@ -5217,6 +5211,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e825c9de-8756-44d5-bff7-fd200e3693fa")
+	)
+	(junction
+		(at 78.74 22.86)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ee2e6775-e0b6-4869-bd1f-a19a9137371b")
 	)
 	(junction
 		(at 227.33 38.1)
@@ -5764,16 +5764,6 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 16.51) (xy 78.74 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2056e5f3-bfc2-4b2f-b02d-95f3ead0dc9c")
-	)
-	(wire
-		(pts
 			(xy 163.83 134.62) (xy 175.26 134.62)
 		)
 		(stroke
@@ -5861,16 +5851,6 @@
 			(type default)
 		)
 		(uuid "2ac491fa-8c0a-41f8-8d82-6798a63fa2ff")
-	)
-	(wire
-		(pts
-			(xy 76.2 34.29) (xy 76.2 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2cd965a2-1633-4ac3-8e91-3b4283430579")
 	)
 	(wire
 		(pts
@@ -6021,6 +6001,16 @@
 			(type default)
 		)
 		(uuid "3492524f-a2bb-4a3b-9dc9-a6ccbb5a4492")
+	)
+	(wire
+		(pts
+			(xy 78.74 27.94) (xy 78.74 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3496f9c8-897b-4e75-bf78-93479ee52844")
 	)
 	(polyline
 		(pts
@@ -6224,7 +6214,7 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 22.86) (xy 76.2 25.4)
+			(xy 76.2 16.51) (xy 76.2 22.86)
 		)
 		(stroke
 			(width 0)
@@ -7004,16 +6994,6 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 16.51) (xy 76.2 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7ff5bbfd-489e-4b3f-81a1-3d6441724cc7")
-	)
-	(wire
-		(pts
 			(xy 279.4 38.1) (xy 279.4 40.64)
 		)
 		(stroke
@@ -7101,6 +7081,16 @@
 			(type default)
 		)
 		(uuid "89022715-1264-4c2d-b16d-14b1006ebc65")
+	)
+	(wire
+		(pts
+			(xy 76.2 27.94) (xy 76.2 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "89ccc73b-c03c-4341-a9ec-1cd275dd284c")
 	)
 	(wire
 		(pts
@@ -7194,16 +7184,6 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 30.48) (xy 78.74 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "91e9d9cf-305e-4077-ba80-112e8ec1c2df")
-	)
-	(wire
-		(pts
 			(xy 219.71 40.64) (xy 219.71 46.99)
 		)
 		(stroke
@@ -7251,6 +7231,16 @@
 			(type default)
 		)
 		(uuid "94d50ef4-6304-4079-99c3-9505460487dc")
+	)
+	(wire
+		(pts
+			(xy 76.2 22.86) (xy 76.2 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "950fa4c5-311d-41d0-8867-0ee4f1ace5b0")
 	)
 	(wire
 		(pts
@@ -7514,16 +7504,6 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 27.94) (xy 78.74 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a849c153-aa5e-4761-b352-f9f3ca0f9afc")
-	)
-	(wire
-		(pts
 			(xy 34.29 144.78) (xy 41.91 144.78)
 		)
 		(stroke
@@ -7551,6 +7531,16 @@
 			(type default)
 		)
 		(uuid "ad56fde2-38ba-4f67-8a9e-1025a1b41a8e")
+	)
+	(wire
+		(pts
+			(xy 78.74 30.48) (xy 78.74 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aebb780d-bba4-411d-8a76-9f29cb572133")
 	)
 	(wire
 		(pts
@@ -7944,7 +7934,7 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 22.86) (xy 78.74 25.4)
+			(xy 78.74 16.51) (xy 78.74 22.86)
 		)
 		(stroke
 			(width 0)
@@ -8021,6 +8011,16 @@
 			(type default)
 		)
 		(uuid "d6fc4f2d-283d-4745-beb3-7826e7cca42d")
+	)
+	(wire
+		(pts
+			(xy 78.74 25.4) (xy 78.74 22.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d70607fa-d22d-425e-887e-a19689ae3b13")
 	)
 	(wire
 		(pts
@@ -8144,16 +8144,6 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 27.94) (xy 76.2 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ddeda7c9-84ef-4838-a02b-40cd68656dd8")
-	)
-	(wire
-		(pts
 			(xy 279.4 35.56) (xy 279.4 38.1)
 		)
 		(stroke
@@ -8261,6 +8251,16 @@
 			(type default)
 		)
 		(uuid "e90f7ce2-ab53-4efe-a10e-f1e1f7c3d955")
+	)
+	(wire
+		(pts
+			(xy 76.2 30.48) (xy 76.2 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e995dca3-51f9-4a9c-b7ae-3026305ccf2f")
 	)
 	(wire
 		(pts
@@ -9126,6 +9126,28 @@
 			)
 		)
 	)
+	(global_label "3V3"
+		(shape input)
+		(at 104.14 13.97 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "3d40320e-ca21-430b-86ae-8b59730ea0b8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 97.6472 13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SC_OUT"
 		(shape input)
 		(at 83.82 106.68 0)
@@ -9390,28 +9412,6 @@
 			)
 		)
 	)
-	(global_label "5V"
-		(shape input)
-		(at 104.14 13.97 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "6b27cf67-bb01-440f-9042-a287405900a3")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 98.8567 13.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "CAN_L"
 		(shape input)
 		(at 156.21 100.33 0)
@@ -9474,6 +9474,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3V3"
+		(shape input)
+		(at 127 13.97 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "7b0922e1-ea0f-42bc-9cfe-c3539a557b7a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 120.5072 13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -10305,28 +10327,6 @@
 		(uuid "f7c3eb47-25a5-4478-a1a5-7caad9bf9b76")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 215.3943 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "5V"
-		(shape input)
-		(at 127 13.97 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "faf180d4-20eb-4646-9738-87800ce4345c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 121.7167 13.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17892,8 +17892,7 @@
 	)
 	(symbol
 		(lib_id "GR_PSLM31_23-FTGP-45-FG:GR_PSLM31.23-FTGP-45-FG")
-		(at 78.74 30.48 0)
-		(mirror x)
+		(at 78.74 22.86 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17901,7 +17900,7 @@
 		(dnp no)
 		(uuid "d6fa83bc-4788-4fc6-acb3-9156304ebb00")
 		(property "Reference" "LED2"
-			(at 87.63 19.05 0)
+			(at 87.63 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17910,7 +17909,7 @@
 			)
 		)
 		(property "Value" "GR_PSLM31.23-FTGP-45-FG"
-			(at 97.79 25.4 0)
+			(at 97.79 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17920,7 +17919,7 @@
 			)
 		)
 		(property "Footprint" "DR-05/footprints:GRPSLM3123FTGP45FG"
-			(at 97.79 -64.44 0)
+			(at 97.79 117.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17930,7 +17929,7 @@
 			)
 		)
 		(property "Datasheet" "https://dammedia.osram.info/media/resource/hires/osram-dam-11180138/GR%20PSLM31.23_EN.pdf"
-			(at 97.79 -164.44 0)
+			(at 97.79 217.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17940,7 +17939,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 78.74 30.48 0)
+			(at 78.74 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17949,7 +17948,7 @@
 			)
 		)
 		(property "Height" "0.7"
-			(at 97.79 -364.44 0)
+			(at 97.79 417.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17959,7 +17958,7 @@
 			)
 		)
 		(property "Mouser Part Number" "720-PSLM3123A4675"
-			(at 97.79 -464.44 0)
+			(at 97.79 517.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17969,7 +17968,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/OSRAM-Opto-Semiconductors/GR-PSLM3123-FTGP-45-FG?qs=%252BEew9%252B0nqrBXO84zH3MxCQ%3D%3D"
-			(at 97.79 -564.44 0)
+			(at 97.79 617.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17979,7 +17978,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "ams OSRAM"
-			(at 97.79 -664.44 0)
+			(at 97.79 717.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17989,7 +17988,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "GR PSLM31.23-FTGP-45-FG"
-			(at 97.79 -764.44 0)
+			(at 97.79 817.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18787,7 +18786,8 @@
 	)
 	(symbol
 		(lib_id "GR_PSLM31_23-FTGP-45-FG:GR_PSLM31.23-FTGP-45-FG")
-		(at 76.2 30.48 180)
+		(at 76.2 22.86 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18795,7 +18795,7 @@
 		(dnp no)
 		(uuid "f73090e7-4330-43fe-915e-9ff4b96a5cc3")
 		(property "Reference" "LED1"
-			(at 66.04 19.05 0)
+			(at 66.04 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18804,7 +18804,7 @@
 			)
 		)
 		(property "Value" "GR_PSLM31.23-FTGP-45-FG"
-			(at 69.85 19.05 0)
+			(at 69.85 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18814,7 +18814,7 @@
 			)
 		)
 		(property "Footprint" "DR-05/footprints:GRPSLM3123FTGP45FG"
-			(at 57.15 -64.44 0)
+			(at 57.15 117.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18824,7 +18824,7 @@
 			)
 		)
 		(property "Datasheet" "https://dammedia.osram.info/media/resource/hires/osram-dam-11180138/GR%20PSLM31.23_EN.pdf"
-			(at 57.15 -164.44 0)
+			(at 57.15 217.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18834,7 +18834,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 76.2 30.48 0)
+			(at 76.2 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18843,7 +18843,7 @@
 			)
 		)
 		(property "Height" "0.7"
-			(at 57.15 -364.44 0)
+			(at 57.15 417.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18853,7 +18853,7 @@
 			)
 		)
 		(property "Mouser Part Number" "720-PSLM3123A4675"
-			(at 57.15 -464.44 0)
+			(at 57.15 517.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18863,7 +18863,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/OSRAM-Opto-Semiconductors/GR-PSLM3123-FTGP-45-FG?qs=%252BEew9%252B0nqrBXO84zH3MxCQ%3D%3D"
-			(at 57.15 -564.44 0)
+			(at 57.15 617.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18873,7 +18873,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "ams OSRAM"
-			(at 57.15 -664.44 0)
+			(at 57.15 717.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18883,7 +18883,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "GR PSLM31.23-FTGP-45-FG"
-			(at 57.15 -764.44 0)
+			(at 57.15 817.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)

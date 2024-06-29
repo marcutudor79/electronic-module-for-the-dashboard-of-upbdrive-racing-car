@@ -1,8 +1,0 @@
-1. CAN_H
-2. CAN_L
-3. 12V
-4. GND
-5. BOOST_BTN
-6. Hybrid_SLCTR
-7. Radiator on/off
-8. Start_engine_OUT

@@ -45,6 +45,24 @@
    @note: possible values: 0 - 4 */
 #define NEUTRAL_GEAR        (0)
 
+/*
+   @brief: Set the coolant overheat message threshold
+   @note: possible values are 0 - 255
+*/
+#define COOLANT_OVERHEAT_THRESHOLD (100)
+
+/*
+   @brief: Set the oil pressure message threshold
+   @note: possible values are 0 - 255
+*/
+#define LOW_OIL_PRESSURE_THRESHOLD (50)
+
+/*
+   @brief: Set the low 12 battery message threshold
+   @note: possible values are 0 - 255
+*/
+#define LOW_12V_BATTERY_THRESHOLD (12)
+
 /* @brief: Set the display data transmission rate,
    @note: possible values are:
     60 HZ: 17/portTICK_PERIOD_MS
@@ -109,7 +127,7 @@
    5  HZ:   200/portTICK_PERIOD_MS
    10 HZ:   100/portTICK_PERIOD_MS
 */
-#define SHIFTLED_RATE         (250/portTICK_PERIOD_MS)
+#define NEUTRAL_LED_RATE        (1000/portTICK_PERIOD_MS)
 
 /* @brief: Set the refresh rate for the SHIFT STRIP on the dashboard
    @note: possible value are:
@@ -235,13 +253,13 @@ typedef struct display_data_t {
    /***********************************************************
     *              SECOND DISPLAY PAGE for debug              *
     ***********************************************************/
-   /* CAN bus status is 0x00 for ON or 0xFF for OFF */
+   /* CAN bus status is true for ON or false for FAULT */
    uint8_t can_status;
 
-   /* Hybrid system status is 0x00 for OK or 0xFF for FAULT */
+   /* Hybrid system status is true for OK or false for FAULT */
    uint8_t hybrid_status;
 
-   /* Safety circuit status is 0x00 for OK or 0xFF for FAULT */
+   /* Safety circuit status is true for OK or false for FAULT */
    uint8_t safety_circuit_status;
 
    /* Oil pressure value is between 0 - 150 (uint8_t max 255) */
@@ -308,20 +326,12 @@ typedef struct display_data_t {
       int16_t is 2^15 */
    int16_t accelerometer[MPU6050_AXIS_NUM];
 
+   /* Accelerometer data computed in g's */
+   float accelerometer_g[MPU6050_AXIS_NUM];
+
    /* Intake Air Temperature (IAT) is between 0 - 100 (uint8_t max 255) */
    uint8_t iat;
 
-   /* This is a byte dedicated to error flags.
-   Bits in error flags:
-   [0]: coolant_temperature higher than 100 degrees
-   [1]: oil_temperature higher than 150 degrees
-   [2]: low oil pressure error
-   [3]: hybrid_status unknown
-   [4]: safety_circuit_status unknown
-   [5]: can_status unknown
-   [6]: tps application is higher than 100 %
-   */
-   uint8_t error_flags;
 } display_data_t ;
 
 /*
@@ -334,24 +344,37 @@ typedef struct display_data_t {
 */
 typedef struct status_firmware_t {
 
-    /* pointer to the structure containing all the data to be
-       send to the display and logged on the sdcard */
-    display_data_t *display_data;
+   /* pointer to the structure containing all the data to be
+      send to the display and logged on the sdcard */
+   display_data_t *display_data;
 
-    /* gloabl semaphore handle for the display data struct that will handle
-       concurrent access requests from the:
-       - can_send   task
-       - lcd_update task
-       - can_read   task
-       - sdcard_write task
-       - shift_neutral_led_update task
-       - shift_strip_led_update task
-       - hybrid_selector_read task
-       - acceleromter_read task */
-    SemaphoreHandle_t xSemaphore_display_data;
+   /* gloabl semaphore handle for the display data struct that will handle
+      concurrent access requests from the:
+      - can_send   task
+      - lcd_update task
+      - can_read   task
+      - sdcard_write task
+      - neutral_led_update task
+      - shift_strip_led_update task
+      - hybrid_selector_read task
+      - acceleromter_read task */
+   SemaphoreHandle_t xSemaphore_display_data;
 
-    /* flag that signals a change_page request. It is handled in lcd_update task */
-    uint8_t signal_change_page;
+   /* flag that signals a change_page request. It is handled in lcd_update task */
+   uint8_t signal_change_page;
+
+   /* Store the time from the RTC of the car */
+   /* time in seconds */
+   uint8_t time_second;
+
+   /* time in minutes */
+   uint8_t time_minute;
+
+   /* time in hours */
+   uint8_t time_hour;
+
+   /* sdcard_logging state is either true for OK or false for ERROR */
+   uint8_t sdcard_logging;
 
 } status_firmware_t ;
 
