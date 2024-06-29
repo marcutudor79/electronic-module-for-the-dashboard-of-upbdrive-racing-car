@@ -8,7 +8,7 @@ My Bachelor's degree that consists in research & design the following components
 - Firmware for the Raspberry Pi Pico with pico-sdk
 
 # Thesis
-The document can be referred [here.](Documentation/Marculescu_Tudor.pdf)
+The document can be referred [here.](Documentation/Thesis.pdf)
 
 # Thesis summary
-The thesis sumarry can be referred [here.](Documentation/Marculescu_Tudor_summary.pdf)
+The thesis sumarry can be referred [here.](Documentation/Summary.pdf)
