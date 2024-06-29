@@ -4,6 +4,5 @@ My Bachelor's degree that consists of the electronic module for the Formula Stud
 # Thesis
 The document can be referred [here.](Documentation/Marculescu_Tudor.pdf)
 
-# Thesis summary and presentation
+# Thesis summary
 The thesis sumarry can be referred [here.](Documentation/Marculescu_Tudor_summary.pdf)
-The presentation of the thesis is [here.](Documentation/Marculescu_Tudor_presentation.pdf)
